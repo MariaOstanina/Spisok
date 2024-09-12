@@ -1,8 +1,9 @@
 import "../styles.css";
 import { useEffect, useState } from "react";
 import { User } from "../components/User";
+import { Header } from "../components/Header";
 
-export const UserListPage = ({ onUserClick }) => {
+export const UserListPage = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     fetch("https://api.github.com/users")
@@ -14,22 +15,26 @@ export const UserListPage = ({ onUserClick }) => {
   const [searchText, setSearchText] = useState("");
 
   return (
-    <div className="App">
+    <>
+      <Header/>
+      <div className="App">
       <h1>Список пользователей</h1>
       <input
         type="text"
         placeholder="поиск"
         onChange={(e) => setSearchText(e.target.value)}
       ></input>
+      {console.log(users)}
+      
       {users
         .filter((data) => data.login.toLowerCase().includes(searchText))
         .map((user) => (
           <User
-            onClick={() => onUserClick(user.login)}
             key={user.id}
             data={user}
           />
         ))}
-    </div>
+      </div>
+    </>
   );
 };

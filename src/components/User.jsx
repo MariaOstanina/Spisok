@@ -1,12 +1,14 @@
-export const User = (props) => {
+import { Link } from "react-router-dom";
+
+export const User = ({data}) => {
   return (
-    <div onClick={props.onClick}>
-      <p style={{ cursor: "pointer" }}>{props.data.login}</p>
+    <Link to={`/user/${data.login}`}>
+      <p style={{ cursor: "pointer" }}>{data.login}</p>
       <img
         style={{ cursor: "pointer" }}
-        src={props.data.avatar_url}
+        src={data.avatar_url}
         height="100px"
       />
-    </div>
+    </Link>
   );
 };
